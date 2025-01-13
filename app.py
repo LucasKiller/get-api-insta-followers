@@ -28,12 +28,7 @@ def callback():
     """Rota para processar o código retornado pelo Instagram"""
     code = request.args.get('code')
     if not code:
-        return """
-            <script>
-                window.opener.alert('Nenhum código foi retornado pelo Instagram.');
-                window.close();
-            </script>
-        """
+        return jsonify({"error": "Nenhum código retornado pelo Instagram."}), 400
 
     # Trocar o código pelo token de acesso
     token_url = "https://api.instagram.com/oauth/access_token"
@@ -46,62 +41,32 @@ def callback():
     }
     response = requests.post(token_url, data=data)
     if response.status_code != 200:
-        return f"""
-            <script>
-                window.opener.alert('Erro ao obter o token de acesso: {response.text}');
-                window.close();
-            </script>
-        """
+        return jsonify({"error": "Erro ao obter o token de acesso.", "details": response.json()}), 400
 
-    body = response.json()
-    access_token = body.get("access_token")
-    user_id = body.get("user_id")
+    access_token = response.json().get("access_token")
+    user_id = response.json().get("user_id")
 
     # Obter informações do perfil
     profile_url = f"https://graph.instagram.com/v21.0/me?fields=id,username,account_type,media_count,followers_count&access_token={access_token}"
     profile_response = requests.get(profile_url)
 
     if profile_response.status_code != 200:
-        return f"""
-            <script>
-                window.opener.alert('Erro ao obter informações do perfil: {profile_response.text}');
-                window.close();
-            </script>
-        """
+        return jsonify({"error": "Erro ao obter informações do perfil.", "details": profile_response.json()}), 400
 
     profile_data = profile_response.json()
     followers = profile_data.get("followers_count", 0)
 
-    # Geração do script para comunicar à página original
+    # Redirecionar com base no número de seguidores
     if followers > 5000000:
-        return f"""
-            <script>
-                window.opener.location.href = "https://exercitodeinfluencia.com.br/5mm/";
-                window.close();
-            </script>
-        """
+        return redirect("https://exercitodeinfluencia.com.br/5mm/")
     elif followers > 1000000:
-        return f"""
-            <script>
-                window.opener.location.href = "https://exercitodeinfluencia.com.br/1mm-a-5mm/";
-                window.close();
-            </script>
-        """
+        return redirect("https://exercitodeinfluencia.com.br/1mm-a-5mm/")
     elif followers > 500000:
-        return f"""
-            <script>
-                window.opener.location.href = "https://exercitodeinfluencia.com.br/500k-a-1mm/";
-                window.close();
-            </script>
-        """
+        return redirect("https://exercitodeinfluencia.com.br/500k-a-1mm/")
     elif followers > 100000:
-        return f"""
-            <script>
-                window.opener.location.href = "https://exercitodeinfluencia.com.br/100k-a-500k/";
-                window.close();
-            </script>
-        """
+        return redirect("https://exercitodeinfluencia.com.br/100k-a-500k/")
     else:
+        # Renderizar formulário para quem tem menos de 100k seguidores
         return """
             <script>
                 window.opener.document.getElementById('form-container').style.display = 'block';
@@ -111,3 +76,4 @@ def callback():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+    

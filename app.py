@@ -128,7 +128,7 @@ def callback():
                     </script>
                 </head>
                 <body>
-                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/?showform=1" target="_self">clique aqui</a>.</p>
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/?showform=1#form" target="_self">clique aqui</a>.</p>
                 </body>
             </html>
         """

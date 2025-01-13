@@ -123,7 +123,7 @@ def callback():
             <html>
                 <head>
                     <script>
-                        window.opener.location.href = "https://exercitodeinfluencia.com.br/?showform=1";
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/?showform=1#form";
                         window.close();
                     </script>
                 </head>

@@ -67,7 +67,21 @@ def callback():
         return redirect("https://exercitodeinfluencia.com.br/100k-a-500k/")
     else:
     # Retornar para o domínio principal com o parâmetro para ativar o formulário
-        return redirect("https://exercitodeinfluencia.com.br/popup-close?showform=1")
+        return """
+            <html>
+                <head>
+                    <script>
+                        // Redirecionar a página original e fechar o pop-up
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/?showform=1";
+                        window.close();
+                    </script>
+                </head>
+                <body>
+                    <!-- Mensagem amigável caso o JavaScript não funcione -->
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/?showform=1" target="_self">clique aqui</a>.</p>
+                </body>
+            </html>
+        """
 
 
 if __name__ == '__main__':

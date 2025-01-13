@@ -51,23 +51,52 @@ def callback():
     profile_response = requests.get(profile_url)
 
     if profile_response.status_code != 200:
-        return jsonify({"error": "Erro ao obter informações do perfil.", "details": profile_response.json()}), 400
+        return f"""
+            <script>
+                window.opener.alert('Erro ao obter informações do perfil: {profile_response.text}');
+                window.close();
+            </script>
+        """
 
     profile_data = profile_response.json()
     followers = profile_data.get("followers_count", 0)
 
     # Redirecionar com base no número de seguidores
     if followers > 5000000:
-        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/5mm/"})
+        return f"""
+            <script>
+                window.opener.location.href = "https://exercitodeinfluencia.com.br/5mm/";
+                window.close();
+            </script>
+        """
     elif followers > 1000000:
-        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/1mm-a-5mm/"})
+        return f"""
+            <script>
+                window.opener.location.href = "https://exercitodeinfluencia.com.br/1mm-a-5mm/";
+                window.close();
+            </script>
+        """
     elif followers > 500000:
-        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/500k-a-1mm/"})
+        return f"""
+            <script>
+                window.opener.location.href = "https://exercitodeinfluencia.com.br/500k-a-1mm/";
+                window.close();
+            </script>
+        """
     elif followers > 100000:
-        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/100k-a-500k/"})
+        return f"""
+            <script>
+                window.opener.location.href = "https://exercitodeinfluencia.com.br/100k-a-500k/";
+                window.close();
+            </script>
+        """
     else:
-        # Instrução para exibir o formulário
-        return jsonify({"show_form": True})
+        return """
+            <script>
+                window.opener.document.getElementById('form-container').style.display = 'block';
+                window.close();
+            </script>
+        """
 
 
 if __name__ == '__main__':

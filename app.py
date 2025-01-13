@@ -20,7 +20,7 @@ def home():
         <html>
         <head><title>Login com Instagram</title></head>
         <body>
-            <button onclick="window.open('{auth_url}', '_blank', 'width=500,height=700')">
+            <button onclick="window.open('{auth_url}', '_blank', 'width=250,height=350')">
                 Login com Instagram
             </button>
         </body>

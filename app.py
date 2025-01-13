@@ -6,21 +6,20 @@ app = Flask(__name__)
 # Configurações do Instagram
 CLIENT_ID = "1192672039076047"
 CLIENT_SECRET = "13988311217058edd577fc254e8244ae"
-REDIRECT_URI = "https://get-api-insta-followers.onrender.com/callback"  # Atualize com seu domínio do Render
+REDIRECT_URI = "https://get-api-insta-followers.onrender.com/callback"
 
 
 @app.route('/')
 def home():
     """Rota inicial para exibir o botão de login"""
     auth_url = (
-        f"https://www.instagram.com/oauth/authorize?"
-        f"client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&scope=instagram_business_basic"
+        f"https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish"
     )
     return f"""
         <html>
         <head><title>Login com Instagram</title></head>
         <body>
-            <button onclick="window.open('{auth_url}', '_blank', 'width=250,height=350')">
+            <button onclick="window.open('{auth_url}', '_blank', 'width=350,height=400')">
                 Login com Instagram
             </button>
         </body>
@@ -52,7 +51,7 @@ def callback():
     user_id = response.json().get("user_id")
 
     # Obter informações do perfil
-    profile_url = f"https://graph.instagram.com/{user_id}?fields=id,username,account_type,media_count,followers_count&access_token={access_token}"
+    profile_url = f"https://graph.instagram.com/v21.0/me?fields=id,username,account_type,media_count,followers_count&access_token={access_token}"
     profile_response = requests.get(profile_url)
 
     if profile_response.status_code != 200:

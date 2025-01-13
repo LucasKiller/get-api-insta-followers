@@ -58,75 +58,16 @@ def callback():
 
     # Redirecionar com base no número de seguidores
     if followers > 5000000:
-        return redirect("https://exercitodeinfluencia.com.br/5mm/")
+        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/5mm/"})
     elif followers > 1000000:
-        return redirect("https://exercitodeinfluencia.com.br/1mm-a-5mm/")
+        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/1mm-a-5mm/"})
     elif followers > 500000:
-        return redirect("https://exercitodeinfluencia.com.br/500k-a-1mm/")
+        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/500k-a-1mm/"})
     elif followers > 100000:
-        return redirect("https://exercitodeinfluencia.com.br/100k-a-500k/")
+        return jsonify({"redirect": "https://exercitodeinfluencia.com.br/100k-a-500k/"})
     else:
-        # Renderizar formulário para quem tem menos de 100k seguidores
-        return """
-            <html>
-            <head><title>Formulário de Cadastro</title></head>
-            <body>
-                <div class="form-container">
-                    <form id="instagramForm">
-                        <input type="text" name="nome" placeholder="Nome">
-                        <input type="email" name="email" placeholder="E-mail">
-                        <input type="text" name="cidade" placeholder="Cidade">
-                        <input type="text" name="instagram" id="instagramUsername" placeholder="@ do Instagram" required>
-                        <select name="seguidores">
-                            <option value="" disabled selected>Nº de Seguidores</option>
-                            <option value="menos-1000">Menos de 1.000</option>
-                            <option value="1000-5000">1.000 - 5.000</option>
-                            <option value="5000-10000">5.000 - 10.000</option>
-                            <option value="mais-10000">Mais de 10.000</option>
-                        </select>
-                        <button type="submit">Enviar</button>
-                    </form>
-                </div>
-                <style>
-                    .form-container {{
-                        background-color: #1B263B;
-                        padding: 20px;
-                        border-radius: 8px;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                        width: 100%;
-                        max-width: 400px;
-                        margin: 0 auto;
-                    }}
-                    .form-container input, 
-                    .form-container select, 
-                    .form-container button {{
-                        width: 100%;
-                        padding: 10px;
-                        margin-bottom: 15px;
-                        border: 1px solid #415A77;
-                        border-radius: 4px;
-                        background-color: #1B263B;
-                        color: #E0E1DD;
-                        font-size: 14px;
-                    }}
-                    .form-container button {{
-                        background-color: #38E5E7;
-                        color: #0D1B2A;
-                        font-weight: bold;
-                        cursor: pointer;
-                        border: none;
-                        transition: background-color 0.3s;
-                    }}
-                    .form-container button:hover {{
-                        background-color: #2DC1C2;
-                    }}
-                    .form-container input::placeholder {{
-                        color: #7D8895;
-                    }}
-                </style>
-            </body>
-            </html>
-        """
+        # Instrução para exibir o formulário
+        return jsonify({"show_form": True})
 
 
 if __name__ == '__main__':

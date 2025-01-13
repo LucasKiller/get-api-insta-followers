@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Configurações do Instagram
 CLIENT_ID = "1192672039076047"
 CLIENT_SECRET = "13988311217058edd577fc254e8244ae"
-REDIRECT_URI = "https://<SEU_DOMINIO>.onrender.com/callback"  # Atualize com seu domínio do Render
+REDIRECT_URI = "https://get-api-insta-followers.onrender.com/callback"  # Atualize com seu domínio do Render
 
 
 @app.route('/')

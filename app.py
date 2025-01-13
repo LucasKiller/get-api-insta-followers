@@ -67,8 +67,7 @@ def callback():
         return redirect("https://exercitodeinfluencia.com.br/100k-a-500k/")
     else:
     # Retornar para o domínio principal com o parâmetro para ativar o formulário
-    else:
-    return redirect("https://exercitodeinfluencia.com.br/popup-close?showform=1")
+        return redirect("https://exercitodeinfluencia.com.br/popup-close?showform=1")
 
 
 if __name__ == '__main__':

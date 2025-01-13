@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify
+from flask import Flask, redirect, request, jsonify
 import requests
 
 app = Flask(__name__)
@@ -11,20 +11,16 @@ REDIRECT_URI = "https://get-api-insta-followers.onrender.com/callback"
 
 @app.route('/')
 def home():
-    """Rota inicial para exibir o botão de login"""
+    """Redireciona diretamente para o autenticador do Instagram"""
     auth_url = (
-        f"https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish"
+        f"https://www.instagram.com/oauth/authorize?"
+        f"enable_fb_login=0&force_authentication=1"
+        f"&client_id={CLIENT_ID}"
+        f"&redirect_uri={REDIRECT_URI}"
+        f"&response_type=code"
+        f"&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish"
     )
-    return f"""
-        <html>
-        <head><title>Login com Instagram</title></head>
-        <body>
-            <button onclick="window.open('{auth_url}', '_blank', 'width=450,height=600')">
-                Login com Instagram
-            </button>
-        </body>
-        </html>
-    """
+    return redirect(auth_url)
 
 
 @app.route('/callback')
@@ -51,7 +47,7 @@ def callback():
     user_id = response.json().get("user_id")
 
     # Obter informações do perfil
-    profile_url = f"https://graph.instagram.com/{user_id}?fields=id,username,account_type,media_count,followers_count&access_token={access_token}"
+    profile_url = f"https://graph.instagram.com/v21.0/me?fields=id,username,account_type,media_count,followers_count&access_token={access_token}"
     profile_response = requests.get(profile_url)
 
     if profile_response.status_code != 200:
@@ -70,7 +66,7 @@ def callback():
     elif followers > 100000:
         return redirect("https://exercitodeinfluencia.com.br/100k-a-500k/")
     else:
-        # Renderizar o formulário em HTML
+        # Renderizar formulário para quem tem menos de 100k seguidores
         return """
             <html>
             <head><title>Formulário de Cadastro</title></head>
@@ -131,7 +127,7 @@ def callback():
             </body>
             </html>
         """
-        
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

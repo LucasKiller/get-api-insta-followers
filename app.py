@@ -59,79 +59,79 @@ def callback():
     # Redirecionar com base no número de seguidores
     if followers > 5000000:
     # Redirecionar para a página correspondente e fechar o pop-up
-    return """
-        <html>
-            <head>
-                <script>
-                    window.opener.location.href = "https://exercitodeinfluencia.com.br/5mm/";
-                    window.close();
-                </script>
-            </head>
-            <body>
-                <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/5mm/" target="_self">clique aqui</a>.</p>
-            </body>
-        </html>
-    """
-elif followers > 1000000:
+        return """
+            <html>
+                <head>
+                    <script>
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/5mm/";
+                        window.close();
+                    </script>
+                </head>
+                <body>
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/5mm/" target="_self">clique aqui</a>.</p>
+                </body>
+            </html>
+        """
+    elif followers > 1000000:
     # Redirecionar para a página correspondente e fechar o pop-up
-    return """
-        <html>
-            <head>
-                <script>
-                    window.opener.location.href = "https://exercitodeinfluencia.com.br/1mm-a-5mm/";
-                    window.close();
-                </script>
-            </head>
-            <body>
-                <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/1mm-a-5mm/" target="_self">clique aqui</a>.</p>
-            </body>
-        </html>
-    """
-elif followers > 500000:
+        return """
+            <html>
+                <head>
+                    <script>
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/1mm-a-5mm/";
+                        window.close();
+                    </script>
+                </head>
+                <body>
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/1mm-a-5mm/" target="_self">clique aqui</a>.</p>
+                </body>
+            </html>
+        """
+    elif followers > 500000:
     # Redirecionar para a página correspondente e fechar o pop-up
-    return """
-        <html>
-            <head>
-                <script>
-                    window.opener.location.href = "https://exercitodeinfluencia.com.br/500k-a-1mm/";
-                    window.close();
-                </script>
-            </head>
-            <body>
-                <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/500k-a-1mm/" target="_self">clique aqui</a>.</p>
-            </body>
-        </html>
-    """
-elif followers > 100000:
-    # Redirecionar para a página correspondente e fechar o pop-up
-    return """
-        <html>
-            <head>
-                <script>
-                    window.opener.location.href = "https://exercitodeinfluencia.com.br/100k-a-500k/";
-                    window.close();
-                </script>
-            </head>
-            <body>
-                <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/100k-a-500k/" target="_self">clique aqui</a>.</p>
-            </body>
-        </html>
-    """
-else:
-    # Retornar para o domínio principal com o parâmetro para ativar o formulário
-    return """
-        <html>
-            <head>
-                <script>
-                    window.opener.location.href = "https://exercitodeinfluencia.com.br/?showform=1";
-                    window.close();
-                </script>
-            </head>
-            <body>
-                <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/?showform=1" target="_self">clique aqui</a>.</p>
-            </body>
-        </html>
-    """
+        return """
+            <html>
+                <head>
+                    <script>
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/500k-a-1mm/";
+                        window.close();
+                    </script>
+                </head>
+                <body>
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/500k-a-1mm/" target="_self">clique aqui</a>.</p>
+                </body>
+            </html>
+        """
+    elif followers > 100000:
+        # Redirecionar para a página correspondente e fechar o pop-up
+        return """
+            <html>
+                <head>
+                    <script>
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/100k-a-500k/";
+                        window.close();
+                    </script>
+                </head>
+                <body>
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/100k-a-500k/" target="_self">clique aqui</a>.</p>
+                </body>
+            </html>
+        """
+    else:
+        # Retornar para o domínio principal com o parâmetro para ativar o formulário
+        return """
+            <html>
+                <head>
+                    <script>
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/?showform=1";
+                        window.close();
+                    </script>
+                </head>
+                <body>
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/?showform=1" target="_self">clique aqui</a>.</p>
+                </body>
+            </html>
+        """
 
 
 if __name__ == '__main__':

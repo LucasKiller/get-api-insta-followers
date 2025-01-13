@@ -66,13 +66,13 @@ def callback():
     elif followers > 100000:
         return redirect("https://exercitodeinfluencia.com.br/100k-a-500k/")
     else:
-        # Renderizar formulário para quem tem menos de 100k seguidores
-        return """
-            <script>
-                window.opener.document.getElementById('form-container').style.display = 'block';
-                window.close();
-            </script>
-        """
+    # Retornar para o domínio principal com o parâmetro para ativar o formulário
+    return """
+        <script>
+            window.opener.location.href = "https://exercitodeinfluencia.com.br/?showform=1";
+            window.close();
+        </script>
+    """
 
 
 if __name__ == '__main__':

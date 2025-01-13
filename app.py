@@ -28,7 +28,12 @@ def callback():
     """Rota para processar o código retornado pelo Instagram"""
     code = request.args.get('code')
     if not code:
-        return jsonify({"error": "Nenhum código retornado pelo Instagram."}), 400
+        return """
+            <script>
+                window.opener.alert('Nenhum código foi retornado pelo Instagram.');
+                window.close();
+            </script>
+        """
 
     # Trocar o código pelo token de acesso
     token_url = "https://api.instagram.com/oauth/access_token"
@@ -41,10 +46,16 @@ def callback():
     }
     response = requests.post(token_url, data=data)
     if response.status_code != 200:
-        return jsonify({"error": "Erro ao obter o token de acesso.", "details": response.json()}), 400
+        return f"""
+            <script>
+                window.opener.alert('Erro ao obter o token de acesso: {response.text}');
+                window.close();
+            </script>
+        """
 
-    access_token = response.json().get("access_token")
-    user_id = response.json().get("user_id")
+    body = response.json()
+    access_token = body.get("access_token")
+    user_id = body.get("user_id")
 
     # Obter informações do perfil
     profile_url = f"https://graph.instagram.com/v21.0/me?fields=id,username,account_type,media_count,followers_count&access_token={access_token}"
@@ -61,7 +72,7 @@ def callback():
     profile_data = profile_response.json()
     followers = profile_data.get("followers_count", 0)
 
-    # Redirecionar com base no número de seguidores
+    # Geração do script para comunicar à página original
     if followers > 5000000:
         return f"""
             <script>
@@ -97,7 +108,6 @@ def callback():
                 window.close();
             </script>
         """
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

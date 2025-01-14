@@ -46,7 +46,7 @@ def callback():
     user_id = response.json().get("user_id")
 
     # Obter informações do perfil
-    profile_url = f"https://graph.instagram.com/me?fields=id,username,account_type,media_count&access_token={access_token}"
+    profile_url = f"https://graph.instagram.com/me?fields=id,username,account_type,media_count,followers_count&access_token={access_token}"
     profile_response = requests.get(profile_url)
 
     if profile_response.status_code != 200:

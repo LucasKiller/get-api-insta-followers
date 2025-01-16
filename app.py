@@ -141,12 +141,12 @@ def callback():
             <html>
                 <head>
                     <script>
-                        window.opener.location.href = "https://exercitodeinfluencia.com.br/?showform=1#form";
+                        window.opener.location.href = "https://exercitodeinfluencia.com.br/obrigado";
                         window.close();
                     </script>
                 </head>
                 <body>
-                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/?showform=1#form" target="_self">clique aqui</a>.</p>
+                    <p>Se o pop-up não fechar automaticamente, <a href="https://exercitodeinfluencia.com.br/obrigado" target="_self">clique aqui</a>.</p>
                 </body>
             </html>
         """

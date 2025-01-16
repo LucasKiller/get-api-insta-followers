@@ -59,7 +59,7 @@ def callback():
     # Dados coletados
     name = profile_data.get("name", "Não informado")
     username = profile_data.get("username", "Não informado")
-    followers_count = profile_data.get("followers_count", 0)
+    followers = profile_data.get("followers_count", 0)
 
     # Enviar os dados para o WordPress
     form_data = {

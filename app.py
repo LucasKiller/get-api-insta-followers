@@ -64,8 +64,6 @@ def callback():
     # Enviar os dados para o WordPress
     form_data = {
         "nome": name,
-        "email": "Vindo oficialmente do Instagram",
-        "cidade": "Vindo oficialmente do Instagram",
         "instagram": username,
         "seguidores": followers,
     }

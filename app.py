@@ -67,7 +67,7 @@ def callback():
         "email": "Vindo oficialmente do Instagram",
         "cidade": "Vindo oficialmente do Instagram",
         "instagram": username,
-        "seguidores": followers_count,
+        "seguidores": followers,
     }
     wordpress_response = requests.post(WORDPRESS_FORM_URL, data=form_data)
 

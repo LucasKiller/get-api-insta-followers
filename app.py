@@ -8,6 +8,8 @@ CLIENT_ID = "1192672039076047"
 CLIENT_SECRET = "13988311217058edd577fc254e8244ae"
 REDIRECT_URI = "https://get-api-insta-followers.onrender.com/callback"
 
+# URL do WordPress para salvar os dados do formulário
+WORDPRESS_FORM_URL = "https://exercitodeinfluencia.com.br/wp-admin/admin-post.php?action=save_instagram_form"
 
 @app.route('/')
 def home():
@@ -53,7 +55,24 @@ def callback():
         return jsonify({"error": "Erro ao obter informações do perfil.", "details": profile_response.json()}), 400
 
     profile_data = profile_response.json()
-    followers = profile_data.get("followers_count", 0)
+    
+    # Dados coletados
+    name = profile_data.get("name", "Não informado")
+    username = profile_data.get("username", "Não informado")
+    followers_count = profile_data.get("followers_count", 0)
+
+    # Enviar os dados para o WordPress
+    form_data = {
+        "nome": name,
+        "email": "Vindo oficialmente do Instagram",
+        "cidade": "Vindo oficialmente do Instagram",
+        "instagram": username,
+        "seguidores": followers_count,
+    }
+    wordpress_response = requests.post(WORDPRESS_FORM_URL, data=form_data)
+
+    if wordpress_response.status_code != 200:
+        return jsonify({"error": "Erro ao salvar dados no WordPress.", "details": wordpress_response.text}), 500
 
     # Redirecionar com base no número de seguidores
     if followers > 5000000:

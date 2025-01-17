@@ -20,7 +20,7 @@ def home():
         f"&client_id={CLIENT_ID}"
         f"&redirect_uri={REDIRECT_URI}"
         f"&response_type=code"
-        f"&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish"
+        f"&scope=instagram_business_basic"
     )
     return redirect(auth_url)
 
